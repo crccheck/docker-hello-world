@@ -5,5 +5,5 @@ services:
 
 before_install:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker build -t roninen/hello-world:$COMMIT .
   - docker push roninen/hello-world
-  
