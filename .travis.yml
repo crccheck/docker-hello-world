@@ -9,3 +9,4 @@ before_install:
   - docker push roninen/hello-world
 
 language: go
+
