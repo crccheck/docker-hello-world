@@ -16,7 +16,7 @@ script: true
 after_success:
   - docker --version
   - docker build -t hello-world .
-  - docker push "hello-world:latest"
+  - docker push roninen/hello-world:latest
 
 deploy:
   skip_cleanup: true
