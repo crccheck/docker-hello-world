@@ -9,11 +9,16 @@ before_install:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker build -t roninen/hello-world .
 
+install: true
+
 script: true
 
+after_success:
+  - docker --version
+  - docker build -t hello-world .
+  - docker push "hello-world:latest"
+
 deploy:
-  provider: script
-  script: docker push "hello-world:latest"
   skip_cleanup: true
 
 language: go
