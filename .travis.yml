@@ -18,7 +18,4 @@ after_success:
   - docker build -t hello-world .
   - docker push roninen/hello-world:latest
 
-deploy:
-  skip_cleanup: true
-
 language: go
