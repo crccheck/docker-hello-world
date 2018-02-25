@@ -14,5 +14,6 @@ script: true
 deploy:
   provider: script
   script: docker push "hello-world:latest"
+  skip_cleanup: true
 
 language: go
