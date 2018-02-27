@@ -15,6 +15,7 @@ script: true
 after_success:
   - docker --version
   - docker build -t hello-world .
+  - docker tag hello-world roninen/hello-world:latest
   - docker push roninen/hello-world:latest
 
 language: go
