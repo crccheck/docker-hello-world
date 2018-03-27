@@ -4,8 +4,8 @@ stages:
 
 variables:  
   GL_IMAGE: registry.gitlab.com/roninen/docker-hello-world:$CI_COMMIT_SHA
-  COMMIT_IMAGE: registry.gitlab.com/roninen/docker-hello-world:$CI_COMMIT_TAG
-  LATEST_IMAGE: registry.gitlab.com/roninen/docker-hello-world:latest
+  COMMIT_IMAGE: roninen/docker-hello-world:$CI_COMMIT_TAG
+  LATEST_IMAGE: roninen/docker-hello-world:latest
 
 services:
   - docker:dind
