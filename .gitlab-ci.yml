@@ -16,6 +16,7 @@ contain:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t $GL_IMAGE .
-    - docker tag $GL_IMAGE $COMMIT_IMAGE
+# This fails for some reason
+#   - docker tag $GL_IMAGE $COMMIT_IMAGE
     - docker tag $GL_IMAGE $LATEST_IMAGE
     - docker push $GL_IMAGE
