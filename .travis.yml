@@ -10,8 +10,9 @@ install: true
 script: true
 
 after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker --version
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker build -t hello-world .
   - ./deploy.sh
 
 language: go
