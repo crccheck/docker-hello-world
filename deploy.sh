@@ -8,6 +8,9 @@ fi
 
 export REPO="roninen/hello-world"
 
+# First 7 chars of commit hash
+export COMMIT=${TRAVIS_COMMIT::7}
+
 # Escape slashes in branch names
 export BRANCH=${TRAVIS_BRANCH//\//_}
 
