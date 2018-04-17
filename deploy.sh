@@ -12,9 +12,9 @@ if [ "$TRAVIS_PULL_REQUEST" != false ]; then
     echo "Tagging pull request" "$TRAVIS_PULL_REQUEST"
     export BASE="$REPO:pr-$TRAVIS_PULL_REQUEST"
     docker tag hello-world "$BASE"
-    docker tag "$BASE" "$BASE-travis-$TRAVIS_BUILD_NUMBER"
+    docker tag "$BASE" "$REPO-$TRAVIS_BUILD_NUMBER"
     docker push "$BASE"
-    docker push "$BASE-travis-$TRAVIS_BUILD_NUMBER"
+    docker push "$REPO-travis-$TRAVIS_BUILD_NUMBER"
     exit 0
 fi
 
