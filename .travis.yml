@@ -13,6 +13,7 @@ after_success:
   - docker --version
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker build -t hello-world .
+  - env
   - ./deploy.sh
 
 language: go
