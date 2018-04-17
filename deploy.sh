@@ -10,13 +10,16 @@ export BRANCH=${TRAVIS_BRANCH//\//_}
 
 if [ "$TRAVIS_PULL_REQUEST" != false ]; then
     echo "Tagging pull request" "$TRAVIS_PULL_REQUEST"
-    export BASE="$REPO:pr"
-    docker tag hello-world "$BASE_$TRAVIS_PULL_REQUEST_$COMMIT"
-    docker tag "$BASE_$COMMIT" "$BASE_$BRANCH"
-    docker tag "$BASE_$COMMIT" "$BASE_travis-$TRAVIS_BUILD_NUMBER"
-    docker push "$BASE_$COMMIT"
-    docker push "$BASE_travis-$TRAVIS_BUILD_NUMBER"
-    docker push "$BASE_$BRANCH"
+    export BASE="$REPO:pr-$TRAVIS_PULL_REQUEST"
+    echo docker tag hello-world "$BASE-$COMMIT"
+    echo docker tag "$BASE-$COMMIT" "$BASE-$BRANCH"
+    echo docker tag "$BASE-$COMMIT" "$BASE-travis-$TRAVIS_BUILD_NUMBER"
+    docker tag hello-world "$BASE-$COMMIT"
+    docker tag "$BASE-$COMMIT" "$BASE-$BRANCH"
+    docker tag "$BASE-$COMMIT" "$BASE-travis-$TRAVIS_BUILD_NUMBER"
+    docker push "$BASE-$COMMIT"
+    docker push "$BASE-travis-$TRAVIS_BUILD_NUMBER"
+    docker push "$BASE-$BRANCH"
     exit 0
 fi
 
