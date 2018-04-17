@@ -5,17 +5,14 @@ install: true
 services:
   - docker
 
-before_install:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-
 install: true
 
 script: true
 
 after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker --version
-  - docker build -t hello-world .
-  - docker tag hello-world roninen/hello-world:latest
-  - docker push roninen/hello-world:latest
+  - ./deploy.sh
 
 language: go
+
