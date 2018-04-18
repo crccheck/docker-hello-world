@@ -1,6 +1,10 @@
 FROM busybox
 MAINTAINER Chris <c@crccheck.com>
 
+WORKDIR /app
+
+COPY . /app
+
 ADD index.html /www/index.html
 
 EXPOSE 8000
