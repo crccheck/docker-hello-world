@@ -1,5 +1,5 @@
 FROM busybox:latest
-MAINTAINER Chris <c@crccheck.com>
+LABEL maintainer="Chris <c@crccheck.com>"
 
 ADD index.html /www/index.html
 
