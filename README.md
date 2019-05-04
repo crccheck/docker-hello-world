@@ -29,18 +29,26 @@ $ docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world
 ```
 
 You can now interact with this as if it were a dumb web server:
+
 ```
 $ curl localhost
+<xmp>
 Hello World
-...
+...snip...
+```
 
-# Every request returns the same thing
+```
+$ curl -I localhost
+HTTP/1.0 200 OK
+```
+
+```
 $ curl -X POST localhost/super/secret
-Hello World
-...
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD>
+...snip...
+```
 
-# Does not send actual HTTP responses (this should probably change so this can
-# be used with load balancers)
+```
 $ curl --write-out %{http_code} --silent --output /dev/null localhost
-000
+200
 ```
