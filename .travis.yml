@@ -7,5 +7,5 @@ before_install:
 
 script:
   - docker ps -a
-  - curl localhost:8000
-  - curl localhost:8000/health
+  - curl --fail localhost:8000
+  - curl --fail -I localhost:8000
