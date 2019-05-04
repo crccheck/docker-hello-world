@@ -10,6 +10,11 @@ REPOSITORY               TAG       IMAGE ID        CREATED          VIRTUAL SIZE
 crccheck/hello-world     latest    2b28c6ad8d1b    4 months ago     1.2MB
 ```
 
+I made this because there were lots of scenarios where wanted a Docker
+container that speaks HTTP, but every image used in guides took seconds to
+download. With a tiny Docker image, I could test things from a fresh
+environment in under a second. I like faster feedback loops.
+
 
 Sample Usage
 ------------
