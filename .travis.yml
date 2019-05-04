@@ -1,4 +1,10 @@
 services:
   - docker
 
-script: docker build .
+before_install:
+  - docker build -t hello-world .
+  - docker run -d -p 127.0.0.1:8000:8000 hello-world
+
+script:
+  - curl localhost:8000
+  - curl localhost:8000/health
