@@ -1,8 +1,8 @@
 Hello World
 ===========
 
-This is a simple image that just gives a response on port 8000. Use this to
-test your web orchestration. It's small enough to fit on one floppy disk:
+This is a simple Docker image that just gives http responses on port 8000. It's
+small enough to fit on one floppy disk:
 
 ```bash
 $ docker images | grep hell
