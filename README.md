@@ -10,6 +10,14 @@ REPOSITORY               TAG       IMAGE ID        CREATED          VIRTUAL SIZE
 crccheck/hello-world     latest    2b28c6ad8d1b    4 months ago     1.2MB
 ```
 
+I made this initially because there were lots of scenarios where I wanted a
+Docker container that speaks HTTP, but every guide used images that took
+seconds to download. Armed with a tiny Docker image, I could test things in a
+fresh environment in under a second. I like faster feedback loops.
+
+**THANK YOU** to the surprisingly large number of contributors that have made
+this better for everyone over the years.
+
 
 Sample Usage
 ------------
@@ -17,22 +25,30 @@ Sample Usage
 ### Starting a web server on port 80
 
 ```bash
-$ docker run -d --name web-test -p 80:8000 crccheck/hello-world
+$ docker run -d --rm --name web-test -p 80:8000 crccheck/hello-world
 ```
 
 You can now interact with this as if it were a dumb web server:
+
 ```
 $ curl localhost
+<xmp>
 Hello World
-...
+...snip...
+```
 
-# Every request returns the same thing
+```
+$ curl -I localhost
+HTTP/1.0 200 OK
+```
+
+```
 $ curl -X POST localhost/super/secret
-Hello World
-...
+<HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD>
+...snip...
+```
 
-# Does not send actual HTTP responses (this should probably change so this can
-# be used with load balancers)
+```
 $ curl --write-out %{http_code} --silent --output /dev/null localhost
-000
+200
 ```
