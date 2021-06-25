@@ -48,7 +48,7 @@ jobs:
         id: semver
         uses: paulhatch/semantic-version@v4.0.2
         with:
-          format: "${major}.${minor}.${patch}-b${env.GITHUB_RUN_NUMBER }"
+          format: "${major}.${minor}.${patch}-b${{ env.GITHUB_RUN_NUMBER }}"
         
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
