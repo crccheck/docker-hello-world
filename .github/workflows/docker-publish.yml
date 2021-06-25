@@ -6,21 +6,19 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '36 20 * * *'
   push:
-    branches: [ master ]
+    branches: [ master, dev ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
   build:
@@ -44,6 +42,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: get semver
+        id: semver
+        uses: paulhatch/semantic-version@v4.0.2
+        
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -51,7 +53,12 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=raw,value=${{ steps.semver.outputs.version }}
+        
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -61,3 +68,23 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  
+#  release:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    if: github.ref == 'refs/heads/master'
+#    
+#    steps:
+#      - name: Bump version and push tag
+#        id: tag_version
+#        uses: mathieudutour/github-tag-action@v5.5
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Create a GitHub release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          body_path: CHANGELOG.md
+#          name: ${{ steps.tag_version.outputs.new_tag }}
+#          tag_name: Release ${{ steps.tag_version.outputs.new_tag }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
