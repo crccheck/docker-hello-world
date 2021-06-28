@@ -47,7 +47,7 @@ jobs:
       - name: version format
         id: version_format
         run: |
-          if ["$REF" == 'refs/heads/master']
+          if [[ "$REF" == 'refs/heads/master' ]]
           then
               echo "::set-output name=format::\${major}.\${minor}.\${patch}"
           else
