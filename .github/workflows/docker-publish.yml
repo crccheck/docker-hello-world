@@ -47,11 +47,11 @@ jobs:
       - name: version format
         id: version_format
         run: |
-          if [$REF == 'refs/heads/master']
+          if ["$REF" == 'refs/heads/master']
           then
-              echo "::set-output name=format::${major}.${minor}.${patch}"
+              echo "::set-output name=format::\${major}.\${minor}.\${patch}"
           else
-              echo "::set-output name=format::${major}.${minor}.${patch}-${increment}"
+              echo "::set-output name=format::\${major}.\${minor}.\${patch}-\${increment}"
           fi
         env:
           REF: ${{ github.ref }}
