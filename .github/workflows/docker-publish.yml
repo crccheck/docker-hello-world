@@ -24,6 +24,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    outputs:
+      version: ${{ steps.semver.outputs.version }}
+      
     permissions:
       contents: read
       packages: write
@@ -85,22 +89,23 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   
-#  release:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    if: github.ref == 'refs/heads/master'
-#    
-#    steps:
-#      - name: Bump version and push tag
-#        id: tag_version
-#        uses: mathieudutour/github-tag-action@v5.5
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#      - name: Create a GitHub release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          body_path: CHANGELOG.md
-#          name: ${{ steps.tag_version.outputs.new_tag }}
-#          tag_name: Release ${{ steps.tag_version.outputs.new_tag }}
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{needs.build.outputs.version}}
+      - name: Create a GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: CHANGELOG.md
+          name: ${{ steps.tag_version.outputs.new_tag }}
+          tag_name: Release ${{ steps.tag_version.outputs.new_tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
