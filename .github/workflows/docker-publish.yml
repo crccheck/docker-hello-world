@@ -43,12 +43,24 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: version format
+        id: version_format
+        run: |
+          if [$REF == 'refs/heads/master']
+          then
+              echo "::set-output name=format::${major}.${minor}.${patch}"
+          else
+              echo "::set-output name=format::${major}.${minor}.${patch}-${increment}"
+          fi
+        env:
+          REF: ${{ github.ref }}
 
       - name: get semver
         id: semver
         uses: paulhatch/semantic-version@v4.0.2
         with:
-          format: "${major}.${minor}.${patch}-${increment}"
+          format: ${{ steps.version_format.outputs.format }}
         
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
