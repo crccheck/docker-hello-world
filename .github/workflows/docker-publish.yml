@@ -111,4 +111,4 @@ jobs:
           name: ${{ steps.tag_version.outputs.new_tag }}
           tag_name: Release ${{ steps.tag_version.outputs.new_tag }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
