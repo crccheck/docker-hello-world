@@ -108,7 +108,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.md
-          name: ${{ steps.tag_version.outputs.new_tag }}
-          tag_name: Release ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
