@@ -1,10 +1,12 @@
 FROM busybox:latest
+ENV PORT=8000
 LABEL maintainer="Chris <c@crccheck.com>"
 
 ADD index.html /www/index.html
 
-EXPOSE 8000
-HEALTHCHECK CMD nc -z localhost 8000
+# EXPOSE $PORT
+
+HEALTHCHECK CMD nc -z localhost $PORT
 
 # Create a basic webserver and run it until the container is stopped
-CMD trap "exit 0;" TERM INT; httpd -p 8000 -h /www -f & wait
+CMD trap "exit 0;" TERM INT; httpd -p $PORT -h /www -f & wait
