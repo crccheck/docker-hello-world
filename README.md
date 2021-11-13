@@ -1,5 +1,4 @@
-Hello World
-===========
+# Hello World
 
 This is a simple Docker image that just gives http responses on port 8000. It's
 small enough to fit on one floppy disk:
@@ -18,9 +17,7 @@ fresh environment in under a second. I like faster feedback loops.
 **THANK YOU** to the surprisingly large number of contributors that have made
 this better for everyone over the years.
 
-
-Sample Usage
-------------
+## Sample Usage
 
 ### Starting a web server on port 80
 
