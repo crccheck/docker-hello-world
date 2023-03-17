@@ -33,5 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.run_number }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ganeshs777/hello-world:${{ github.run_number }}
