@@ -3,14 +3,13 @@ name: Publish Docker image
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
     
   workflow_dispatch:
 
 jobs:
   push_to_registry:
+    if: startsWith(github.event.head_commit.message, 'Merge pull request')
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
