@@ -21,7 +21,7 @@ jobs:
         # https://github.com/docker/metadata-action
         uses: docker/metadata-action@v3
         with:
-          images: ganeshs777/hello-world-2
+          images: ganeshs777/hello-world-3
 
       - name: Log in to DockerHub
         uses: docker/login-action@v1
@@ -35,4 +35,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ganeshs777/hello-world-2:${{ github.run_number }}.${{ github.run_attempt }}
+          tags: ganeshs777/hello-world-3:${{ github.run_number }}.${{ github.run_attempt }}
