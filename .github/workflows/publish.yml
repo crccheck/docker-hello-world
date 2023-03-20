@@ -11,7 +11,6 @@ on:
 
 jobs:
   push_to_registry:
-    if: github.event.pull_request.merged == true
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
