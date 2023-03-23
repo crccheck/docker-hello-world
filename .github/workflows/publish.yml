@@ -35,4 +35,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ganeshs777/hello-world-3:${{ github.run_number }}.${{ github.run_attempt }}
+          tags: ganeshs777/hello-world-3:7.1.${{ github.run_number }}
