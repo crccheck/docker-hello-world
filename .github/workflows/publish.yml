@@ -36,4 +36,4 @@ jobs:
           context: .
           push: true
           tags: ganeshs777/hello-world-3:7.1.${{ github.run_number }}
-          labels: "build.url=https://google.com"
+          labels: "build.url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
